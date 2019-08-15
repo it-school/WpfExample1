@@ -22,7 +22,29 @@ namespace WpfExample1
     {
         public MainWindow()
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(new Random().Next(2) > 0 ? Properties.Resources.DataLoadSuccess : Properties.Resources.DataLoadFailed);
+
+            Button myButton = new Button();
+            myButton.Width = 100;
+            myButton.Height = 30;
+            myButton.Content = Properties.Resources.header;
+            layoutGrid1.Children.Add(myButton);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(System.Threading.Thread.CurrentThread.CurrentUICulture.ToString());
+            if (System.Threading.Thread.CurrentThread.CurrentUICulture.Equals(System.Globalization.CultureInfo.GetCultureInfo("en-US")))
+                System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("ru-RU");
+            else
+                System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
+
         }
     }
 }
